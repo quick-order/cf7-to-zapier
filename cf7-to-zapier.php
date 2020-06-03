@@ -4,11 +4,11 @@
  * @package           Cf7_To_Zapier
  * @since             1.0.0
  *
- * Plugin Name:       CF7 to Webhook
- * Plugin URI:        https://github.com/Vizir/cf7-to-zapier
+ * Plugin Name:       CUSTOM - CF7 to Webhook
+ * Plugin URI:        https://github.com/quick-order/cf7-to-zapier
  * Description:       Use Contact Form 7 as a trigger to Zapier!
- * Version:           2.1.3
- * Author:            Mário Valney, Vizir Software Studio
+ * Version:           2.1.4
+ * Author:            MBO - (Mário Valney, Vizir Software Studio)
  * Author URI:        http://vizir.com.br/en
  * Text Domain:       cf7-to-webhook
  * Domain Path:       /languages

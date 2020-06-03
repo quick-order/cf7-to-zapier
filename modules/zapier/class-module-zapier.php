@@ -70,6 +70,7 @@ if ( ! class_exists( 'CFTZ_Module_Zapier' ) ) {
 
 			$formattedData = [];
 			foreach($data as $keyImploded => $value) {
+				$value = is_numeric($value) ? (int) $value : $value;
 				$this->split_key_and_set_value_to_pointer($formattedData, $keyImploded, $value);
 			}
 			return $formattedData;
