@@ -49,6 +49,32 @@ if ( ! class_exists( 'CFTZ_Module_Zapier' ) ) {
             $this->core->add_action( 'ctz_trigger_webhook', array( $this, 'pull_the_trigger' ), 10, 2 );
         }
 
+		private function split_key_and_set_value_to_pointer(&$arrayPtr, $keysImploded, $value) {
+			$keys = explode(':', $keysImploded);
+			$lastKey = array_pop($keys);
+
+			foreach($keys as $arrKey) {
+				if (!array_key_exists($arrKey, $arrayPtr)) {
+					$arrayPtr[$arrKey] = [];
+				}
+				$arrayPtr = &$arrayPtr[$arrKey];
+			}
+
+			$arrayPtr[$lastKey] = $value;
+		}
+
+		private function format_nested_values($data) {
+			if (!is_array($data)) {
+				return $data;
+			}
+
+			$formattedData = [];
+			foreach($data as $keyImploded => $value) {
+				$this->split_key_and_set_value_to_pointer($formattedData, $keyImploded, $value);
+			}
+			return $formattedData;
+		}
+
         /**
          * Send data to Zapier
          *
@@ -65,7 +91,7 @@ if ( ! class_exists( 'CFTZ_Module_Zapier' ) ) {
 
             $args = array(
                 'method'    => 'POST',
-                'body'      => json_encode( $data ),
+                'body'      => json_encode( $this->format_nested_values($data) ),
                 'headers'   => array(
                     'Content-Type'  => $content_type,
                 ),
