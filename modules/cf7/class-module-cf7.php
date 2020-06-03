@@ -324,8 +324,9 @@ if ( ! class_exists( 'CFTZ_Module_CF7' ) ) {
                     $key = $webhook_key[0];
                 }
 
-                $data[ $key ] = $value;
+                $data[ $key ] = qo_format_tag_value($tag, $value);
             }
+            $data = qo_format_nested_values($data);
 
             /**
              * You can filter data retrieved from Contact Form tags with 'ctz_get_data_from_contact_form'

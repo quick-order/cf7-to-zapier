@@ -165,6 +165,7 @@ if ( is_a( $contactform, 'WPCF7_ContactForm' ) ) {
 
         $sent_data[ $tag ] = '??????';
     }
+    $sent_data = qo_format_nested_values($sent_data);
 ?>
 
 <pre style="background: #FFF; border: 1px solid #CCC; padding: 10px; margin: 0;"><?php
