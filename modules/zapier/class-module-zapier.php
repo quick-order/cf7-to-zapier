@@ -81,6 +81,12 @@ if ( ! class_exists( 'CFTZ_Module_Zapier' ) ) {
              */
             $result = wp_remote_post( $hook_url, apply_filters( 'ctz_post_request_args', $args ) );
 
+			if (isset($result['response']['code']) && $result['response']['code'] == 422) {
+				$responseBody = json_decode($result['body'], true);
+				$errors = $responseBody['errors'] ?: [];
+				qo_throw_errors($errors, $responseBody['message']);
+			}
+
             // If result is a WP Error, throw a Exception woth the message.
             if ( is_wp_error( $result ) ) {
                 throw new Exception( $result->get_error_message() );
